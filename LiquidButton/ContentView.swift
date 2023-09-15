@@ -12,19 +12,25 @@
 import SwiftUI
 
 struct ContentView: View {
+    @State var show: Bool = false
     var body: some View {
         VStack {
             Rectangle()
                 .mask(canvas)
                 .overlay {
-                    Circle()
-                        .frame(width: 60)
-                    Image(systemName: "plus")
-                        .font(.system(size: 30, weight: .bold))
-                        .foregroundColor(.gray)
+                    ZStack {
+                        Circle()
+                            .frame(width: 60)
+                        Image(systemName: "plus")
+                            .font(.system(size: 30, weight: .bold))
+                            .foregroundColor(.gray)
+                    }
+                    .offset(x: -20, y: -30)
+                    .frame(maxWidth: .infinity,maxHeight: .infinity, alignment: .bottomTrailing)
                 }
         }
     }
+    
     var canvas: some View {
         Canvas { context, size in
             context.drawLayer { drawingContext in
@@ -38,6 +44,10 @@ struct ContentView: View {
         } symbols: {
             Circle().frame(width: 60)
                 .tag(1)
+            Circle().frame(width: 60)
+                .tag(2)
+                .offset(y: show ? 50 : 0)
+
         }
     }
 }
