@@ -19,7 +19,8 @@ struct ContentView: View {
                 .mask(canvas)
                 .overlay {
                     ZStack {
-                        Icons(show: $show, icon: "house", Eoffset: 110, Eanimation: 0.22, delay: 0.14)
+                        Icons(show: $show, icon: "house.fill", Eoffset: 110, Eanimation: 0.22, delay: 0.14)
+                        Icons(show: $show, icon: "person.fill", Eoffset: 190, Eanimation: 0.22, delay: 0.14)
                         
                         Button {
                             withAnimation(.spring(response: 0.5, dampingFraction: 0.5)) {
