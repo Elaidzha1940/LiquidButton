@@ -5,7 +5,7 @@
 //  Created by: Elaidzha Shchukin
 //  Date: 15.09.2023
 //
-//  Status: in progress | Not decorated
+//  Status: #Completed | Decorated
 //
 //  */
 
@@ -60,10 +60,6 @@ struct ContentView: View {
             Circle()
                 .frame(width: 60)
                 .tag(1)
-//            Circle()
-//                .frame(width: 60)
-//                .tag(2)
-//                .offset(y: show ? -75 : 0)
             ElCircle(show: $show, Eoffset: 80, eanimation: 0.3, tag: 2)
             ElCircle(show: $show, Eoffset: 160, eanimation: 0.2, tag: 3)
 
