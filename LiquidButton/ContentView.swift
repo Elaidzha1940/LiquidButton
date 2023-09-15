@@ -19,7 +19,10 @@ struct ContentView: View {
                 .mask(canvas)
                 .overlay {
                     Button {
-                        show.toggle()
+                        withAnimation(.spring(response: 0.5, dampingFraction: 0.5)) {
+                            show.toggle()
+                            
+                        }
                     } label: {
                         ZStack {
                             Circle()
@@ -42,18 +45,22 @@ struct ContentView: View {
             context.addFilter(.blur(radius: 10))
             context.drawLayer { drawingContext in
                 let drawPoint = CGPoint(x: size.width - 50, y: size.height - 60)
-                for index in 1...2 {
+                for index in 1...3 {
                     if let symbol = context.resolveSymbol(id: index) {
                         drawingContext.draw(symbol, at: drawPoint)
                     }
                 }
             }
         } symbols: {
-            Circle().frame(width: 60)
+            Circle()
+                .frame(width: 60)
                 .tag(1)
-            Circle().frame(width: 60)
-                .tag(2)
-                .offset(y: show ? -50 : 0)
+//            Circle()
+//                .frame(width: 60)
+//                .tag(2)
+//                .offset(y: show ? -75 : 0)
+            ElCircle(show: $show, Eoffset: 80, eanimation: 0.3, tag: 2)
+            ElCircle(show: $show, Eoffset: 160, eanimation: 0.2, tag: 3)
 
         }
     }
@@ -62,5 +69,20 @@ struct ContentView: View {
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
+    }
+}
+
+struct ElCircle: View {
+    @Binding  var show: Bool
+    var Eoffset: CGFloat
+    var eanimation: CGFloat
+    var tag: Int
+    
+    var body: some View {
+        Circle()
+            .frame(width: 60)
+            .tag(tag)
+            .offset(y: show ? -Eoffset : 0)
+            .animation(Animation.spring(response: 1, dampingFraction: 0.8).delay(show ? eanimation : 0.1), value: show)
     }
 }
