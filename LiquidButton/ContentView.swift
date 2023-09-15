@@ -86,3 +86,22 @@ struct ElCircle: View {
             .animation(Animation.spring(response: 1, dampingFraction: 0.8).delay(show ? eanimation : 0.1), value: show)
     }
 }
+
+struct Icons: View {
+    @Binding  var show: Bool
+    let icon: String
+    var Eoffset: CGFloat
+    var eanimation: CGFloat
+    var tag: Int
+    
+    var body: some View {
+        
+        Image(systemName: icon)
+            .font(.title)
+            .foregroundColor(.white)
+            .offset(x: -20, y: show ? -Eoffset : -45)
+            .scaleEffect(show ? 1 : 0)
+            .opacity(show ? 1 : 0)
+            .animation(Animation.spring(response: 1, dampingFraction: 0.8).delay(show ? eanimation : delay), value: show)
+    }
+}
