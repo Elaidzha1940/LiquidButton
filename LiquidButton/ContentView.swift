@@ -18,21 +18,25 @@ struct ContentView: View {
             Rectangle()
                 .mask(canvas)
                 .overlay {
-                    Button {
-                        withAnimation(.spring(response: 0.5, dampingFraction: 0.5)) {
-                            show.toggle()
-                            
+                    ZStack {
+                        Icons(show: $show, icon: "house", Eoffset: 110, Eanimation: 0.22, delay: 0.14)
+                        
+                        Button {
+                            withAnimation(.spring(response: 0.5, dampingFraction: 0.5)) {
+                                show.toggle()
+                            }
+                        } label: {
+                            ZStack {
+                                Circle()
+                                    .frame(width: 60)
+                                    .foregroundColor(.black)
+                                Image(systemName: "plus")
+                                    .font(.system(size: 30, weight: .bold))
+                                    .foregroundColor(.white)
+                            }
+                            .offset(x: -20, y: -30)
                         }
-                    } label: {
-                        ZStack {
-                            Circle()
-                                .frame(width: 60)
-                                .foregroundColor(.black)
-                            Image(systemName: "plus")
-                                .font(.system(size: 30, weight: .bold))
-                                .foregroundColor(.gray)
-                        }
-                        .offset(x: -20, y: -30)
+
                     }
                     .frame(maxWidth: .infinity,maxHeight: .infinity, alignment: .bottomTrailing)
                 }
@@ -91,8 +95,8 @@ struct Icons: View {
     @Binding  var show: Bool
     let icon: String
     var Eoffset: CGFloat
-    var eanimation: CGFloat
-    var tag: Int
+    var Eanimation: CGFloat
+    var delay: CGFloat
     
     var body: some View {
         
@@ -102,6 +106,12 @@ struct Icons: View {
             .offset(x: -20, y: show ? -Eoffset : -45)
             .scaleEffect(show ? 1 : 0)
             .opacity(show ? 1 : 0)
-            .animation(Animation.spring(response: 1, dampingFraction: 0.8).delay(show ? eanimation : delay), value: show)
+            .animation(Animation.spring(response: 1, dampingFraction: 0.8).delay(show ? Eanimation : delay), value: show)
+            .onTapGesture {
+                print(icon)
+                withAnimation(.spring(response: 0.5, dampingFraction: 0.5)) {
+                    show.toggle()
+                }
+            }
     }
 }
