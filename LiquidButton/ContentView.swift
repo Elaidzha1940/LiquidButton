@@ -25,7 +25,7 @@ struct ContentView: View {
                 LinearGradient(gradient: Gradient(colors: gradientColors),
                                startPoint: .topLeading,
                                endPoint: .bottomTrailing)
-                    .ignoresSafeArea()
+                .ignoresSafeArea()
                 
                 VStack {
                     Rectangle()
@@ -38,22 +38,22 @@ struct ContentView: View {
                                     label: {
                                         Icons(show: $show, icon: "plus", Eoffset: 270, Eanimation: 0.4, delay: 0.34)
                                     })
-                                    .buttonStyle(PlainButtonStyle()) // Make sure the link looks like an icon, not a button
-
+                                .buttonStyle(PlainButtonStyle()) // Make sure the link looks like an icon, not a button
+                                
                                 NavigationLink(
                                     destination: ArrowView(),
                                     label: {
                                         Icons(show: $show, icon: "arrow.right", Eoffset: 190, Eanimation: 0.3, delay: 0.24)
                                     })
-                                    .buttonStyle(PlainButtonStyle())
-
+                                .buttonStyle(PlainButtonStyle())
+                                
                                 NavigationLink(
                                     destination: MinusView(),
                                     label: {
                                         Icons(show: $show, icon: "minus", Eoffset: 110, Eanimation: 0.2, delay: 0.14)
                                     })
-                                    .buttonStyle(PlainButtonStyle())
-
+                                .buttonStyle(PlainButtonStyle())
+                                
                                 Button {
                                     withAnimation(.spring(response: 0.4, dampingFraction: 0.8)) {
                                         show.toggle()
@@ -62,14 +62,7 @@ struct ContentView: View {
                                     ZStack {
                                         Circle()
                                             .frame(width: 60)
-                                            .foregroundStyle(
-                                                LinearGradient(
-                                                    gradient: Gradient(colors: [
-                                                        Color.white.opacity(0.9),
-                                                        Color.green.opacity(0.9),
-                                                        Color.green]),
-                                                    startPoint: .top,
-                                                    endPoint: .bottom))
+                                            .foregroundStyle(Color.green.gradient)
                                         
                                         Image(systemName: "plus")
                                             .font(.system(size: 30, weight: .bold))
@@ -173,6 +166,3 @@ struct ContentView_Previews: PreviewProvider {
     }
 }
 
-
-
-//            .animation(.easeInOut(duration: 0.5).delay(eanimation), value: show)
